@@ -1,2 +1,2 @@
 # Water-Well-Classification
-Project 3
+Phase 3 Project, December 2020 by Mark Patterson
