@@ -16,7 +16,7 @@ The data set was provided by the Tanzanian Ministry of Water and a non-profit gr
 * 1 = non-functional (38%)
 * 2=functional but needs repair (7%)
 
-![target variable classes](images/class-imbalance-bars.png)
+![target variable classes](images/class-imbalnce-bars.png)
 
 ## EDA
 Initial data exploration indicated that many of the variables were different groupings of similar concepts. To get a better handle on this, a mind-map was created. This helped to identify 15 redundant or potentially less useful features. The remaining features were visualized to examine differences in distributions for each of the target classes. For example, it can be seen that older water-points constitute a larger proportion of non-functional ones. 
