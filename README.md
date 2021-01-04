@@ -25,7 +25,7 @@ Other issues identified and addressed during data exploration and cleaning inclu
 Another case of many 0 values was the feature “population.” There were approximately 18,000 with a value of 0. I decided to cut these records.
 * Several features had a class of “other” or “unknown” that had a large count. These provide little value as it is not clear if they represent missing values or something else. These were dropped after initial modeling, 
 
-At the end of EDA, the dataset contained 35,303 records and 17 variables. The 9 categorical variables were one-hot encoded, resulting in a total of 75 features.
+At the end of EDA, the dataset contained *35,303 records* and 17 variables. The 9 categorical variables were one-hot encoded, resulting in a total of *75 features.*
 
 
 ## Modeling Process
@@ -35,18 +35,18 @@ To address this classification problem, 4 supervised machine learning models wer
 * Random Forest
 * XGBoost
 
-All models were run on the initial data set with the unbalanced target classes. The worst performance (in terns of accuracy and recall for class 1 (non-functional) was obtained from a KNN model (test accuracy of 0.58, and class 1 recall of 0.57) - note that the standard scaler was applied to the data prior to modeling. 
+All models were run on the initial data set with the unbalanced target classes. The worst performance (in terns of accuracy and recall for class 1 (non-functional) was obtained from a KNN model (test accuracy of 0.58, and class 1 recall of 0.57). Note that the standard scaler was applied to the data prior to modeling. 
 
 An iterative approach was taken that included the following refinements to the models and the data set.
 1. Initial “vanilla” modeling with all 4 models without taking the class imbalance into account. 
 2. Modeling with all 4 variables after SMOTE was applied to the target variable (creating synthetic data for the 2 under-represented classes). 
 3. Several rounds of hyper-parameter tuning (via GridSearchCV) for the Random Forest and XGBoost models. Several iterations of the Decision Trees model with varying max_depth values (3 to 15). 
-4. Reclassify the target variable into 2 classes, leaving the majority class as is (55%) and combining the other 2 classes together (45%). This makes sense if we now consider class 1 as being water-point needing attention (rebuild or repair), and makes the class imbalance less problematic so that SMOTE is not needed. 5. Several rounds of Decision Tree models were run with this data-set. 
-6. Finally, the original data was adjusted (cut 4 original features that were less important; cut 9 “other” and “unknown” classes from original variables, and did not “drop first” wen one-hot encoding. This resulted in a data set of 38 columns (down from 75 in the first modeling rounds). This was run along with the 2 class target variable on several rounds of Decision Trees (max_depth 3 to 18) and XGBoost. 
+4. Reclassify the target variable into *2 classes*, leaving the majority class as is (55%) and combining the other 2 classes together (45%). This makes sense if we now consider class 1 as being water-point needing attention (rebuild or repair), and makes the class imbalance less problematic so that SMOTE is not needed. 5. Several rounds of Decision Tree models were run with this data-set. 
+6. Finally, the original data was adjusted (cut 4 original features that were less important; cut 9 “other” and “unknown” classes from original variables, and did not “drop first” wen one-hot encoding. This resulted in a data set of *38 columns* (down from 75 in the first modeling rounds). This was run along with the 2 class target variable on several rounds of Decision Trees (max_depth 3 to 18) and XGBoost. 
 
 
 ## Final Model
-After numerous rounds of modeling and hyper-parameter tuning, an XGBoost model provided the best performance. For the 2-class target variable, this model had an accuracy of 0.82 and a class 1 recall of 0.77. The class 0 recall was 0.87. This means that 82% of the time, this model will predict correctly a true positive (an observation is in class 1 = a non-functioning or in-need of repair water-point) or a true negative (an observation is in class 0 = a functional water-point). The recall measure for class 1 tells us that there is about a 23% chance of having a false negative where we will predict that a water-point is in need of repair or refurbished when in fact it is functioning.
+After numerous rounds of modeling and hyper-parameter tuning, an XGBoost model provided the best performance. For the 2-class target variable, this model had an **accuracy of 0.82 and a class 1 recall of 0.77.** The class 0 recall was 0.87. This means that 82% of the time, this model will predict correctly a true positive (an observation is in class 1 = a non-functioning or in-need of repair water-point) or a true negative (an observation is in class 0 = a functional water-point). The recall measure for class 1 tells us that there is about a 23% chance of having a false negative where we will predict that a water-point is in need of repair or refurbished when in fact it is functioning.
 
 Feature importance was evaluated at various points in the modeling process. In general consistent results were obtained. The features contributing the most to the model included: 
 * Age (construciton_year)
