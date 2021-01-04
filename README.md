@@ -49,9 +49,9 @@ An iterative approach was taken that included the following refinements to the m
 After numerous rounds of modeling and hyper-parameter tuning, an XGBoost model provided the best performance. For the 2-class target variable, this model had an **accuracy of 0.82 and a class 1 recall of 0.77.** The class 0 recall was 0.87. This means that 82% of the time, this model will predict correctly a true positive (an observation is in class 1 = a non-functioning or in-need of repair water-point) or a true negative (an observation is in class 0 = a functional water-point). The recall measure for class 1 tells us that there is about a 23% chance of having a false negative where we will predict that a water-point is in need of repair or refurbished when in fact it is functioning.
 
 Feature importance was evaluated at various points in the modeling process. In general consistent results were obtained. The features contributing the most to the model included: 
-* Age (construciton_year)
-* Quantity of water (quantity_dry, quantity_enough, amount_tsh)
-* Location (longitude, latitude)
+* **Age** (construciton_year)
+* **Quantity of water** (quantity_dry, quantity_enough, amount_tsh)
+* **Location** (longitude, latitude)
 
 
 ## Conclusions
